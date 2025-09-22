@@ -47,14 +47,14 @@ df = pd.DataFrame(data)
 
 #history of changes
 #1
-#print(df.head(5))
-#print("Shape:", df.shape)
-#print("Columns:", df.columns)
+print(df.head(5))
+print("Shape:", df.shape)
+print("Columns:", df.columns)
 
 #2
 df["Discount"] = np.where(df["Quantity"] >= 5, 0.1 * df["Total"], 0)
 df["FinalTotal"] = df["Total"] - df["Discount"]
-#print(df[["OrderID", "Product", "Total", "Discount", "FinalTotal"]].head())
+print(df[["OrderID", "Product", "Total", "Discount", "FinalTotal"]].head())
 
 #3
 new_row = {
@@ -69,140 +69,4 @@ new_row = {
 }
 df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
 df["Total"] = df["Quantity"] * df["Price"]
-#print(df.tail(3))
-
-#4
-#df.loc[df["Product"] == "Mouse", "Price"] = 30
-#df["Total"] = df["Quantity"] * df["Price"]
-#print(df[df["Product"] == "Mouse"])
-
-#5
-df = df.drop(columns=["Discount"])
-df = df.drop(columns=["FinalTotal"])
-#print(df.head())
-
-#6
-df = df.drop(df[df["OrderID"] == 1010].index, axis=0)
-df = df.drop(index=0)
-#print("New shape:", df.shape)
-
-#7
-result1 = df[(df["Category"] == "Electronics") & (df["Quantity"] >= 3)]
-#print(result1)
-result2 = df[df["Price"] > 500]
-#print(result2)
-count_north = df[df["Region"] == "North"].shape[0]
-#print("North orders:", count_north)
-
-#8
-west_sales = df[df["Region"] == "West"]
-#print(west_sales)
-alice_sales = df[df["Customer"] == "Alice"]
-#print(alice_sales)
-subset_sales = df[df["Product"].isin(["Laptop", "Printer"])]
-#print(subset_sales)
-
-#9
-df.loc[df["Category"] == "Furniture", "Price"] *= 0.1
-#print(df)
-df["Total"] = df["Quantity"] * df["Price"]
-#print(df)
-#print(df[df["Category"] == "Furniture"])
-
-#10
-sorted_df = df.sort_values(by="Total", ascending=False)
-print(sorted_df.head(),"\n\n")
-print(sorted_df.head(),"\n\n")
-multi_sort = df.sort_values(by=["Region", "Customer"])
-print(multi_sort.head())
-
-import pandas as pd
-import numpy as np
-
-# Sample sales dataset (20 rows)
-data = {
-    "OrderID": range(1001, 1021),
-    "Product": [
-        "Laptop", "Mouse", "Keyboard", "Monitor", "Laptop",
-        "Headphones", "Mouse", "Chair", "Desk", "Laptop",
-        "Printer", "Keyboard", "Monitor", "Mouse", "Laptop",
-        "Headphones", "Desk", "Monitor", "Printer", "Chair"
-    ],
-    "Category": [
-        "Electronics", "Accessories", "Accessories", "Electronics", "Electronics",
-        "Accessories", "Accessories", "Furniture", "Furniture", "Electronics",
-        "Electronics", "Accessories", "Electronics", "Accessories", "Electronics",
-        "Accessories", "Furniture", "Electronics", "Electronics", "Furniture"
-    ],
-    "Quantity": [2, 5, 3, 4, 1, 6, 10, 2, 1, 3, 2, 4, 2, 7, 5, 3, 2, 4, 1, 6],
-    "Price": [800, 20, 50, 200, 850, 40, 25, 150, 300, 900, 120, 55, 250, 20, 750, 35, 280, 220, 110, 180],
-    "Customer": [
-        "Alice", "Bob", "Charlie", "Diana", "Ethan",
-        "Fiona", "George", "Hannah", "Ian", "Jane",
-        "Kyle", "Laura", "Mike", "Nina", "Oscar",
-        "Paul", "Queen", "Robert", "Sarah", "Tom"
-    ],
-    "Region": [
-        "North", "South", "East", "West", "North",
-        "South", "East", "West", "North", "South",
-        "East", "West", "North", "South", "East",
-        "West", "North", "South", "East", "West"
-    ]
-}
-
-# Create DataFrame
-df = pd.DataFrame(data)
-
-# Compute Total column
-
-new_row = {
-
-    "OrderID": 1021,
-
-    "Product": "Tablet",
-
-    "Category": "Electronics",
-
-    "Quantity": 2,
-
-    "Price": 450,
-
-    "Customer": "Victor",
-
-    "Region": "East"
-
-}
-#history of changes
-df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
-df["Total"] = df["Quantity"] * df["Price"]
-df["Discount"] = np.where(df["Quantity"] >= 5, 0.1 * df["Total"], 0)
-df["FinalTotal"] = df["Total"] - df["Discount"]
-df = df.drop(columns=["Discount"])
-df = df.drop(columns=["FinalTotal"])
-#print(df.head())
-df = df.drop(df[df["OrderID"] == 1010].index, axis=0)
-df = df.drop(index=0)
-print("New shape:", df.shape)
-
-#currently doing
-# Step 1: Sales in West region
-
-west_sales = df[df["Region"] == "West"]
-
-print(west_sales)
-
-
-
-# Step 2: Sales by Alice
-
-alice_sales = df[df["Customer"] == "Alice"]
-
-print(alice_sales)
-
-
-
-# Step 3: Sales of Laptop or Printer
-
-subset_sales = df[df["Product"].isin(["Laptop", "Printer"])]
-
-print(subset_sales)
+print(df.tail(3))
