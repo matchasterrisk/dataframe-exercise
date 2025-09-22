@@ -70,3 +70,26 @@ new_row = {
 df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
 df["Total"] = df["Quantity"] * df["Price"]
 print(df.tail(3))
+
+#4
+df.loc[df["Product"] == "Mouse", "Price"] = 30 
+df["Total"] = df["Quantity"] * df["Price"]
+print(df[df["Product"] == "Mouse"]) 
+
+#5
+df = df.drop(columns=["Discount"])
+df = df.drop(columns=["FinalTotal"])
+print(df.head())
+
+#6
+df = df.drop(df[df["OrderID"] == 1010].index, axis=0)
+df = df.drop(index=0)
+print("New shape:", df.shape)
+
+#7
+result1 = df[(df["Category"] == "Electronics") & (df["Quantity"] >= 3)]
+print(result1)
+result2 = df[df["Price"] > 500]
+print(result2)
+count_north = df[df["Region"] == "North"].shape[0]
+print("North orders:", count_north)
