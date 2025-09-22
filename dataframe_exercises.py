@@ -93,3 +93,25 @@ result2 = df[df["Price"] > 500]
 print(result2)
 count_north = df[df["Region"] == "North"].shape[0]
 print("North orders:", count_north)
+
+#8
+west_sales = df[df["Region"] == "West"]
+print(west_sales)
+alice_sales = df[df["Customer"] == "Alice"]
+print(alice_sales)
+subset_sales = df[df["Product"].isin(["Laptop", "Printer"])]
+print(subset_sales)
+
+#9
+df.loc[df["Category"] == "Furniture", "Price"] *= 0.1
+print(df)
+df["Total"] = df["Quantity"] * df["Price"]
+print(df)
+print(df[df["Category"] == "Furniture"])
+
+#10
+sorted_df = df.sort_values(by="Total", ascending=False)
+print(sorted_df.head(),"\n\n")
+print(sorted_df.head(),"\n\n")
+multi_sort = df.sort_values(by=["Region", "Customer"])
+print(multi_sort.head())
